@@ -85,6 +85,43 @@ public class Picture extends SimplePicture
     
   }
   
+   
+   /** Method to make everything in grayscale */
+  public void grayscale()
+  {
+    
+   Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        
+        int sum = pixelObj.getRed()+pixelObj.getGreen()+pixelObj.getBlue();
+        int value = sum/3;
+        
+        pixelObj.setRed(value);
+        pixelObj.setGreen(value);
+         pixelObj.setBlue(value);
+      }
+    }
+  }
+  
+   /** Method to negate the picture */
+  public void negate()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setBlue(255-pixelObj.getBlue());
+        pixelObj.setGreen(255-pixelObj.getGreen());
+        pixelObj.setRed(255-pixelObj.getRed());
+      }
+    }
+  }
+  
+  
   /** Method to set the blue to 0 */
   public void zeroBlue()
   {
@@ -97,6 +134,76 @@ public class Picture extends SimplePicture
       }
     }
   }
+  
+   /** Method to keep only the blue */
+  public void keepOnlyBlue()
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setRed(0);
+        pixelObj.setGreen(0);
+      }
+    }
+  }
+  
+	  /** To pixelate by dividing area into size x size.
+	 * @param size Side length of square area to pixelate.
+	 */
+	 public void pixelate(int size)
+	 {
+		 Pixel[][] pixels = this.getPixels2D();
+		 
+		 for (int i = 0; i<pixels.length-1; i++)
+		{
+		  for (int j = 0; j<(pixels[0].length-1); j++)
+		  {
+			  int widthLeft = pixels[0].length-2;
+			  int heightLeft = pixels.length-2;
+			  
+			  if((widthLeft>0) && (heightLeft>0))
+			  {
+				  int red = 0;
+				  int green = 0;
+				  int blue = 0;
+				  for(int k = 0; k<2; k++)
+				  {
+					 for(int m = 0; m<2; m++)
+					 {
+						red+= pixels[i+k][j+m].getRed();
+						green+= pixels[i+k][j+m].getGreen();
+						blue+= pixels[i+k][j+m].getBlue(); 
+					 } 
+				  }
+				  pixels[i][j].setRed(red);
+				  pixels[i][j].setGreen(green);
+				  pixels[i][j].setBlue(blue);
+				  i+=2;
+			 }
+			 else
+			 {
+				int red = 0;
+				int green = 0;
+				int blue = 0;
+				for(int k = 0; k<heightLeft; k++)
+				{
+					for(int m = 0; m<widthLeft; m++)
+					{
+						red+= pixels[i+k][j+m].getRed();
+						green+= pixels[i+k][j+m].getGreen();
+						blue+= pixels[i+k][j+m].getBlue(); 
+					}
+				}
+				
+				 pixels[i][j].setRed(red);
+				  pixels[i][j].setGreen(green);
+				  pixels[i][j].setBlue(blue); 
+			 }
+		  }
+		}
+	 }
   
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture

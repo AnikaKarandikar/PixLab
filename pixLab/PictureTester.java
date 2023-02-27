@@ -12,8 +12,44 @@ public class PictureTester
   public static void testZeroBlue()
   {
     Picture beach = new Picture("beach.jpg");
-    beach.explore();
+    beach.explore(); //bring up a window and show me what beach looks like
     beach.zeroBlue();
+    beach.explore();
+  }
+  
+   /** Method to test keepOnlyBlue */
+  public static void testKeepOnlyBlue()
+  {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore(); //bring up a window and show me what beach looks like
+    beach.keepOnlyBlue();
+    beach.explore();
+  }
+  
+   /** Method to test negate */
+  public static void testNegate()
+  {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore(); //bring up a window and show me what beach looks like
+    beach.negate();
+    beach.explore();
+  }
+  
+   /** Method to test grayscale */
+  public static void testGrayscale()
+  {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore(); //bring up a window and show me what beach looks like
+    beach.grayscale();
+    beach.explore();
+  }
+  
+     /** Method to test grayscale */
+  public static void testPixelate()
+  {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore(); //bring up a window and show me what beach looks like
+    beach.pixelate(2);
     beach.explore();
   }
   
@@ -58,12 +94,17 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    testZeroBlue();
-    //testKeepOnlyBlue();
+    
+   // testZeroBlue();
+   // testKeepOnlyBlue();
+   // testNegate();
+   // testGrayscale();
+   
+   testPixelate();
+   
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
-    //testNegate();
-    //testGrayscale();
+   
     //testFixUnderwater();
     //testMirrorVertical();
     //testMirrorTemple();
